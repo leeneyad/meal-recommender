@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+
+<title>Meal Recpmmender</title>
+
+<!-- bootstrap css -->
+<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+
+<!-- style css -->
+<!-- قبل -->
+<!-- <link rel="stylesheet" href="css/style.css"> -->
+<!-- بعد -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+
+<!-- Responsive-->
+<!-- <link rel="stylesheet" href="css/responsive.css"> -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css')}}">
+<!-- fevicon -->
+<!-- <link rel="icon" href="images/fevicon.png" type="image/gif" /> -->
+<link rel="icon" type="image/gif" href="{{ url_for('static', filename='images/fevicon.png')}}">
+
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.min.css') }}">
+<!-- Tweaks for older IEs-->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!-- owl stylesheets --> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"media="screen">
+</head>
+<body>
+      <!-- header section start -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="logo">
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/download-removebg-preview.png') }}">
+    </a>
+  </div> 
+
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <img src="{{ url_for('static', filename='images/toogle-icon.png') }}">
+    </span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('services') }}">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+      </li>
+    </ul> 
+  </div>
+     
+    <!-- services section start -->
+<div class="services_section layout_padding">
+  <div class="container">
+    <h1 class="services_taital">
+      <img src="{{ url_for('static', filename='images/icon-1.png') }}">
+      <span class="about_padding"> Start Here </span>
+    </h1>
+
+    <form action="/predict" method="post">
+      <img src="{{ url_for('static', filename='images/age-range.png') }}" alt="Icon" class="icon">
+      <label for="age">Age:</label>
+      <input type="number" id="age" min="1" max="18" name="age" title="Please enter an AGE between 1 and 18" required><br><br>
+
+      <img src="{{ url_for('static', filename='images/bmi.png') }}" alt="Icon" class="icon">
+      <label for="bmi">BMI:</label>
+      <input type="number" id="bmi" name="bmi" min="8" max="45" step="0.1" title="Please enter a BMI between 10 and 40" required><br><br>
+
+      <img src="{{ url_for('static', filename='images/insuline.png') }}" alt="Icon" class="icon">
+      <label for="insulin">Insulin:</label>
+      <input type="number" id="insulin" name="insulin" min="0" max="300" title="Enter insulin level (0-300 μIU/mL)" step="0.1" required><br><br>
+
+      <button type="submit">Get Recommendations</button><br>
+    </form>
+
+    {% if results %}
+    <div class="results">
+      <h3>Top 3 Recommended Meals</h3>
+      <ul>
+        {% for meal in results %}
+          <li>{{ meal }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!-- services section end -->
+ 
+<!-- footer section start -->
+<div class="footer_section layout_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="footer_logo">
+          <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/download-removebg-preview.png') }}">
+          </a>
+        </div>
+        <p class="footer_text">Middle East University</p>
+      </div>
+      <div class="col">
+        <p class="medicines_text">&copy; Leen Eyad Saloum</p>
+        <p class="medicines_text">&copy; Zaid Almaiah</p>
+        <p class="medicines_text">&copy; RAMA SHADI</p>
+        <p class="medicines_text">&copy; AZEM OLIMAT</p>
+      </div>
+      <div class="col">
+        <p class="medicines_text">Full-Stack Developer & ML Engineer</p>
+        <p class="medicines_text">Data Specialist</p>
+        <p class="medicines_text">Data Collector & Documentation Lead</p>
+        <p class="medicines_text">Documentation Assistant</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- copyright section start -->
+  <div class="copyright_section">
+    <div class="container">
+      <p class="copyright_text">&copy; leen</p>
+    </div>
+  </div>
+  <!-- copyright section end -->
+</div>
+<!-- footer section end -->
+
+<!-- Javascript files-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugin.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+   
+</body>
+</html>
